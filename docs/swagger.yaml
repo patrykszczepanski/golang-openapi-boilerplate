@@ -1,0 +1,53 @@
+basePath: /api/v1
+definitions:
+  main.JSONResult:
+    properties:
+      count:
+        default: 1
+        type: integer
+      data: {}
+      nextPage:
+        type: string
+    type: object
+  main.Order:
+    properties:
+      data: {}
+      id:
+        type: integer
+    type: object
+info:
+  contact: {}
+  title: Core App API
+  version: "1.0"
+paths:
+  /api/helloworld:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success Response
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResult'
+            - properties:
+                data:
+                  $ref: '#/definitions/main.Order'
+              type: object
+      summary: Get list of academy articles
+      tags:
+      - Hello World
+securityDefinitions:
+  Authorization:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
